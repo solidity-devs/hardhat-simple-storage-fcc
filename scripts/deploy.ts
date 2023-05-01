@@ -5,6 +5,7 @@
 // Runtime Environment's members available in the global scope.
 
 import { ethers, run, network } from "hardhat"
+import { SimpleStorage__factory } from "../typechain-types"
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -15,7 +16,9 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage")
+  const SimpleStorageFactory = (await ethers.getContractFactory(
+    "SimpleStorage"
+  )) as SimpleStorage__factory
   console.log("Deploying contract...")
   const simpleStorage = await SimpleStorageFactory.deploy()
   await simpleStorage.deployed()
